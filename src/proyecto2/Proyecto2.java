@@ -5,10 +5,7 @@
  */
 package proyecto2;
 
-/**
- *
- * @author marin
- */
+
 public class Proyecto2 {
 
     /**
