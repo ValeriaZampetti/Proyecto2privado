@@ -5,6 +5,8 @@
  */
 package proyecto2;
 
+import Interfaces.InterfazPrincipal;
+
 
 public class Proyecto2 {
 
@@ -12,7 +14,8 @@ public class Proyecto2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        InterfazPrincipal window = new InterfazPrincipal();
+        window.setVisible(true);
     }
     
 }
