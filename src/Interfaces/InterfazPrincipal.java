@@ -22,6 +22,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     Funciones func = new Funciones();
     
+    static String[] arreglo;
+    
     public InterfazPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -42,6 +44,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         cargartxt = new javax.swing.JButton();
         mostrar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        resultado = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -60,10 +64,21 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jPanel1.add(cargartxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
 
         mostrar.setText("Mostrar");
+        mostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarActionPerformed(evt);
+            }
+        });
         jPanel1.add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
 
         jLabel2.setText("Proyecto 2");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 60, -1));
+
+        resultado.setColumns(20);
+        resultado.setRows(5);
+        jScrollPane1.setViewportView(resultado);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 510, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 420));
 
@@ -86,10 +101,29 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
             File fichero = fx.getSelectedFile();
 
-//            arbol = func.Leer_txt(fichero.getAbsolutePath());
+            arreglo = func.Leer_array(fichero.getAbsolutePath());
+        }
+        for (int i = 0; i < arreglo.length; i++) {
+            System.out.println(arreglo[i]);
         }
 
     }//GEN-LAST:event_cargartxtActionPerformed
+
+    private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
+        // TODO add your handling code here:
+        String recorridoarreglo="";
+        
+        for (int i = 0; i < arreglo.length; i++) {
+            
+            recorridoarreglo+=arreglo[i];
+            
+            
+        } 
+        
+        resultado.setText(recorridoarreglo);
+        
+        
+    }//GEN-LAST:event_mostrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,6 +170,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton mostrar;
+    private javax.swing.JTextArea resultado;
     // End of variables declaration//GEN-END:variables
 }
