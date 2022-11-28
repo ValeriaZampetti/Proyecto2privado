@@ -151,6 +151,27 @@ public class Funciones {
     
     //metodo para validar // **
     
+    public int Precedencia(String operador){
+        switch(operador){
+            case"/":
+                return 4;
+            case"*":
+                return 3;
+            case "+":
+                return 2;
+            case "-":
+                return 1;
+                
+            default:
+                 JOptionPane.showMessageDialog(null, "Sucedió un error");
+                
+               
+        }
+        return -1;
+        
+
+}
+    
     
     //conversion de infijo a postfijo
     public Lista TraduccionInfijaApost(Lista cadena){   
@@ -214,7 +235,7 @@ public class Funciones {
                     }
                     break;
                 case "+":
-                    while(!pila.EsVacio()&& Precedencia(pila.getTope().getElemento()) >= Precedencia(primerTermino))
+                    while(!pila.EsVacio()&& Precedencia((String) pila.getTope().getElemento()) >= Precedencia(primerTermino))
                     {
                         String elementoPila = (String) pila.Desapilar2().getElemento();
                         listaSalida.InsertarFinal(elementoPila);
@@ -222,7 +243,7 @@ public class Funciones {
                     pila.Apilar(primerTermino);
                     break;
                 case "-":
-                    while(!pila.EsVacio()&& Precedencia(pila.getTope().getElemento()) >= Precedencia(primerTermino))
+                    while(!pila.EsVacio()&& Precedencia((String) pila.getTope().getElemento()) >= Precedencia(primerTermino))
                     {
                         String elementoPila = (String) pila.Desapilar2().getElemento();
                         listaSalida.InsertarFinal(elementoPila);
@@ -230,7 +251,7 @@ public class Funciones {
                     pila.Apilar(primerTermino);
                     break;
                 case "*":
-                    while(!pila.EsVacio()&& Precedencia(pila.getTope().getElemento()) >= Precedencia(primerTermino))
+                    while(!pila.EsVacio()&& Precedencia((String) pila.getTope().getElemento()) >= Precedencia(primerTermino))
                     {
                         String elementoPila = (String) pila.Desapilar2().getElemento();
                         listaSalida.InsertarFinal(elementoPila);
@@ -238,7 +259,7 @@ public class Funciones {
                     pila.Apilar(primerTermino);
                     break;
                 case "/":
-                    while(!pila.EsVacio()&& Precedencia(pila.getTope().getElemento()) >= Precedencia(primerTermino))
+                    while(!pila.EsVacio()&& Precedencia((String) pila.getTope().getElemento()) >= Precedencia(primerTermino))
                     {
                         String elementoPila = (String) pila.Desapilar2().getElemento();
                         listaSalida.InsertarFinal(elementoPila);
