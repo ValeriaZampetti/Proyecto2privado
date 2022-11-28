@@ -136,12 +136,26 @@ public class Funciones {
 
     }
 
-    public String TipoDeNotacion(String[] cadena_split) {
+    public Lista TipoDeNotacion(String[] cadena_split) {
         for (int i = 0; i < cadena_split.length; i++) {
             String[] caracteres = cadena_split[i].split("");
             for (int j = 0; j < caracteres.length; j++) {
-                System.out.println(caracteres[j]); // con caracteres[j] accedemos a cada letra
-
+                String ultimo = caracteres[caracteres.length - 1];
+                Lista lista = new Lista();
+                if (caracteres[0].equalsIgnoreCase("/") || caracteres[0].equalsIgnoreCase("+") || caracteres[0].equalsIgnoreCase("-") || caracteres[0].equalsIgnoreCase("*")) {
+                    JOptionPane.showMessageDialog(null, "POLACA");
+                    lista.InsertarFinal(caracteres[j]);
+                    return lista;
+                } else if (ultimo.equalsIgnoreCase("/") || ultimo.equalsIgnoreCase("+") || ultimo.equalsIgnoreCase("-") || ultimo.equalsIgnoreCase("*")) {
+                    JOptionPane.showMessageDialog(null, "POLACA INVERSA");
+                    lista.InsertarFinal(caracteres[j]);
+                    return lista;
+                } else {
+                    JOptionPane.showMessageDialog(null, "INFIJA");
+                    lista.InsertarFinal(caracteres[j]);
+                    return lista;
+                }
+                
             }
         }
         return null;
