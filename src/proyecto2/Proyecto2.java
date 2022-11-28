@@ -6,16 +6,30 @@
 package proyecto2;
 
 import Interfaces.InterfazPrincipal;
-
+import org.graphstream.graph.Graph;
 
 public class Proyecto2 {
+
+//    static Graph grafico;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        InterfazPrincipal window = new InterfazPrincipal();
-        window.setVisible(true);
+//        InterfazPrincipal window = new InterfazPrincipal();
+//        window.setVisible(true);
+
+//        ArbolAB arbol = new ArbolAB();
+
+        
+//        arbol.Insertar("P", null, null);
+//        arbol.Insertar("A", "P","left");
+
+//        grafico = arbol.CrearGrafica_arbol();
+//        arbol.CrearNodes(grafico, arbol.getRoot());
+//        arbol.CrearEdges(grafico, arbol.getRoot());
+        
+
     }
-    
+
 }

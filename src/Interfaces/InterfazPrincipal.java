@@ -10,6 +10,7 @@ import javax.swing.JFileChooser;
 import proyecto2.ArbolAB;
 import proyecto2.Funciones;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -74,6 +75,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         // FALTA VALIDAR QUE SE PUEDA ESCOGER SOLO UN ARCHIBO TXT
         
         JFileChooser fx = new JFileChooser();
+        
+//        fx.setFileSelectionMode(JFileChooser.FILES_ONLY);
+//        fx.setMultiSelectionEnabled(false);
+//        FileNameExtensionFilter filter=new FileNameExtensionFilter("Archivo txt", "txt");
 
         int seleccion = fx.showOpenDialog(this);
 

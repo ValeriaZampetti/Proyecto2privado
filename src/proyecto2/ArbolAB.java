@@ -5,6 +5,11 @@
  */
 package proyecto2;
 
+import org.graphstream.graph.Edge;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
+import org.graphstream.graph.implementations.SingleGraph;
+
 /**
  *
  * @author marin
@@ -107,6 +112,110 @@ public class ArbolAB {
     
     
     
+    
+    
+    /**GRAFICA EL ARBOL VACIO
+     *
+     * @return GRAFICO PARA LA INSERCIÓN DE NODOS Y ENLACES
+     * 
+     */
+    public Graph CrearGrafica_arbol(){
+        
+        System.setProperty("org.graphstream.ui", "swing");
+        
+        Graph graph = new SingleGraph("ARBOL RN");
+        graph.setAttribute("ui.stylesheet", "graph { padding: 40px; } edge { arrow-shape: arrow; arrow-size: 20px, 4px; } node { size: 20px; fill-color: red, black; fill-mode: gradient-horizontal; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #EB2; text-color: #222; } ");    
+        
+        graph.display();
+        
+        return graph;
+    }
+    
+    /** CREA TODOS LOS NODOS DEL GRAFICO
+     *
+     * @param grafico
+     * @param rz
+     * @return GRAFICO LISTO CON TODOS LOS NODOS
+     */
+    public Graph CrearNodes(Graph grafico, NodoAB rz){
+        
+        if (rz == null) {
+            Node a = grafico.addNode("A");
+            a.setAttribute("ui.label", "NULL");
+        } else {
+            if (rz.getHijoIzq() != null && rz.getHijoDer() != null) {
+                IndividualNode(grafico, rz);
+                CrearNodes(grafico, rz.getHijoIzq());
+                CrearNodes(grafico, rz.getHijoDer());
+            } else if (rz.getHijoIzq() != null && rz.getHijoDer() == null) {
+                IndividualNode(grafico, rz);
+                CrearNodes(grafico, rz.getHijoIzq());
+                
+            } else if (rz.getHijoIzq() == null && rz.getHijoDer() != null) {
+                IndividualNode(grafico, rz);
+                CrearNodes(grafico, rz.getHijoDer());
+            } else{
+                IndividualNode(grafico, rz);
+            }
+        }     
+        return grafico;        
+    }
+
+    /**
+     *
+     * @param grafico
+     * @param rz
+     * @return
+     */
+    public Graph CrearEdges(Graph grafico, NodoAB rz){
+        
+        if (rz == null) {
+            Edge ab = grafico.addEdge("a-->b", "a", "b", true);
+            ab.setAttribute("ui.label", "NULL");
+        } else {
+            if (rz.getHijoIzq() != null && rz.getHijoDer() != null) {
+                IndividualEdge(grafico, rz, rz.getHijoIzq());
+                IndividualEdge(grafico, rz, rz.getHijoDer());
+                CrearEdges(grafico, rz.getHijoIzq());
+                CrearEdges(grafico, rz.getHijoDer());
+            }else if (rz.getHijoIzq() != null && rz.getHijoDer() == null) {
+                IndividualEdge(grafico, rz, rz.getHijoIzq());
+                CrearEdges(grafico, rz.getHijoIzq());
+            }else if (rz.getHijoIzq() == null && rz.getHijoDer() != null) {
+                IndividualEdge(grafico, rz, rz.getHijoDer());
+                CrearEdges(grafico, rz.getHijoDer());
+            }else {
+                
+            }  
+        }
+        
+        return grafico;
+    }
+
+    /** CREA UN ENLACE CON EL NODO 
+     *
+     * @param graph
+     * @param origen
+     * @param destino
+     * @return
+     */
+    public Graph IndividualEdge(Graph graph, NodoAB origen, NodoAB destino){
+        graph.addEdge(""+origen.getDato()+"-->"+destino.getDato(), ""+origen.getDato(), ""+destino.getDato(), true);
+        return graph;
+    }
+    
+    /**CREA UN NODO INDIVIDUAL
+     *
+     * @param graph
+     * @param cualquiera
+     * @return EL GRAFICO CON EL NODO INSERTADO
+     */
+    public Graph IndividualNode(Graph graph, NodoAB cualquiera){
+       Node aux = graph.addNode(""+cualquiera.getDato());
+       aux.setAttribute("ui.label", cualquiera.getDato());
+//       aux.setAttribute("ui.color", cualquiera.getColor()+","+cualquiera.getColor());
+       return graph;
+    }
     
     
     

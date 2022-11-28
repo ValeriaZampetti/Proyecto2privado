@@ -57,6 +57,10 @@ public class Funciones {
                         1. La funcion tiene que identificar cual notacion es (infija, postfija/polaca inversa, prefija/polaca)
                            para eso hay que validar.
                         
+                        
+                        2.
+                        
+                        
                         2. Luego insertamos en el arbol
                         
                         3. Mostrar arbol
