@@ -106,6 +106,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         for (int i = 0; i < arreglo.length; i++) {
             System.out.println(arreglo[i]);
         }
+        func.TipoDeNotacion(arreglo);
 
     }//GEN-LAST:event_cargartxtActionPerformed
 

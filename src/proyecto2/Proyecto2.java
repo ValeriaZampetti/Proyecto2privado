@@ -26,16 +26,16 @@ public class Proyecto2 {
 //        arbol.CrearEdges(grafico, arbol.getRoot());
         
 
-        String[] info = {"(3*x^2+2*x*y^2+8*y^3)/(8*x^3+3*x^2*y^2)"};
-        
-        for (int i = 0; i < info.length; i++) {
-            String[] infoBuena = info[i].split("");
-            for (int j = 0; j < infoBuena.length; j++) {
-                System.out.println(infoBuena[j]);
-                
-            }
-            
-        }
+//        String[] info = {"(3*x^2+2*x*y^2+8*y^3)/(8*x^3+3*x^2*y^2)"};
+//        
+//        for (int i = 0; i < info.length; i++) {
+//            String[] infoBuena = info[i].split("");
+//            for (int j = 0; j < infoBuena.length; j++) {
+//                System.out.println(infoBuena[infoBuena.length-1]);
+//                
+//            }
+//            
+//        }
         
 //        System.out.println(info.split(""));
         
