@@ -122,7 +122,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         //listaTraducida.Imprimir();
         String texto2 = listaTraducida.CadenaCompleta();
         
-        resultado.setText(textoLista+texto2);
+        resultado.setText("Notacion Infija:"+textoLista+"Notacion Polaca Inversa:"+texto2);
+//        resultado.setText(texto2);
+        
 //        func.TraduccionInfijaApost(list);
 
         arbol = func.TraduccionPostArbol(listaTraducida);
