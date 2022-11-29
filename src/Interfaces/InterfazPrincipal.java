@@ -11,6 +11,7 @@ import proyecto2.ArbolAB;
 import proyecto2.Funciones;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import proyecto2.Lista;
 
 /**
  *
@@ -21,6 +22,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     ArbolAB arbol = new ArbolAB();
 
     Funciones func = new Funciones();
+    
+    static Lista list;
     
     static String[] arreglo;
     
@@ -103,10 +106,14 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
             arreglo = func.Leer_array(fichero.getAbsolutePath());
         }
-        for (int i = 0; i < arreglo.length; i++) {
-            System.out.println(arreglo[i]);
-        }
+//        for (int i = 0; i < arreglo.length; i++) {
+//            System.out.println(arreglo[i]);
+//        }
         func.TipoDeNotacion(arreglo);
+        
+//        list.Imprimir();
+        
+//        func.TraduccionInfijaApost(list);
 
     }//GEN-LAST:event_cargartxtActionPerformed
 
