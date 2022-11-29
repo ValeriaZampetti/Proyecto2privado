@@ -110,18 +110,10 @@ public class Funciones {
                         JOptionPane.showMessageDialog(null, "ERROR EL ARCHIVO DE TEXTO DEBE CONTENER SOLO 1 LINEA");
                     } else {
                         JOptionPane.showMessageDialog(null, "ÉXITO AL LEER! ");
+                        //String[] aritmeticos = cadena_split[0].split("");
                         return cadena_split;
 
                     }
-//                    return cadena_split;
-//                    for (int i = 0; i < cadena_split.length; i++) {
-//                        String[] cadenaBuena = cadena_split[i].split("");
-////                        return cadenaBuena;
-//                        clone_cadenaBuena = cadenaBuena.clone();
-//
-//                    }
-//                    return clone_cadenaBuena;
-
                 }
 
                 br.close();
@@ -129,11 +121,10 @@ public class Funciones {
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ÉRROR AL LEER! ");
+            JOptionPane.showMessageDialog(null, "ÉRROR AL LEER! "+e.getMessage());
         }
         String[] arreglovacio = new String[1];
         return arreglovacio;
-
     }
 
     public Lista TipoDeNotacion(String[] cadena_split) {
@@ -182,21 +173,20 @@ public class Funciones {
     //metodo para validar // **
     public int Precedencia(String operador) {
         switch (operador) {
-            case "/":
-                return 4;
-            case "*":
+            case "^":
                 return 3;
-            case "+":
+            case "/":
                 return 2;
+            case "*":
+                return 2;
+            case "+":
+                return 1;
             case "-":
                 return 1;
-
             default:
-                JOptionPane.showMessageDialog(null, "Sucedió un error");
-
+                //JOptionPane.showMessageDialog(null, "Sucedió un error");
+                return -1;
         }
-        return -1;
-
     }
 
     //conversion de infijo a postfijo
@@ -206,55 +196,76 @@ public class Funciones {
         boolean error = false;
 
         while (!cadena.EsVacio() && !error) {
-            String primerTermino = (String) pila.Desapilar2().getElemento();
+        //String primerTermino = (String) pila.Desapilar2().getElemento();
+            String primerTermino = (String) cadena.getPfirst().getElemento();
             switch (primerTermino) {
                 case "0":
                     listaSalida.InsertarFinal(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "1":
                     listaSalida.InsertarFinal(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "2":
                     listaSalida.InsertarFinal(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "3":
                     listaSalida.InsertarFinal(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "4":
                     listaSalida.InsertarFinal(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "5":
                     listaSalida.InsertarFinal(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "6":
                     listaSalida.InsertarFinal(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "7":
                     listaSalida.InsertarFinal(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "8":
                     listaSalida.InsertarFinal(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "9":
                     listaSalida.InsertarFinal(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "x":
                     listaSalida.InsertarFinal(primerTermino);
+                    cadena.EliminarInicio();
+                    break;
+                case "y":
+                    listaSalida.InsertarFinal(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "(":
                     pila.Apilar(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case ")":
-                    while (!pila.EsVacio() && pila.getBase().getElemento() != "(") {
+                    while (!pila.EsVacio() &&!"(".equals((String) pila.getTope().getElemento())) {
                         String elementoPila = (String) pila.Desapilar2().getElemento();
                         listaSalida.InsertarFinal(elementoPila);
+                        if (pila.getTope() != null) 
+                        {
+                            if ("(".equals((String) pila.getTope().getElemento())) 
+                            {
+                                pila.Desapilar();
+                            }
+                        }                        
                     }
+                    //String parentesisIzq = primerTermino;
+                    cadena.EliminarInicio();
 
-                    String parentesisIzq = (String) pila.Desapilar2().getElemento();
-
-                    if (parentesisIzq != "(") {
-                        error = true;
-                    }
                     break;
                 case "+":
                     while (!pila.EsVacio() && Precedencia((String) pila.getTope().getElemento()) >= Precedencia(primerTermino)) {
@@ -262,6 +273,7 @@ public class Funciones {
                         listaSalida.InsertarFinal(elementoPila);
                     }
                     pila.Apilar(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "-":
                     while (!pila.EsVacio() && Precedencia((String) pila.getTope().getElemento()) >= Precedencia(primerTermino)) {
@@ -269,6 +281,7 @@ public class Funciones {
                         listaSalida.InsertarFinal(elementoPila);
                     }
                     pila.Apilar(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "*":
                     while (!pila.EsVacio() && Precedencia((String) pila.getTope().getElemento()) >= Precedencia(primerTermino)) {
@@ -276,6 +289,7 @@ public class Funciones {
                         listaSalida.InsertarFinal(elementoPila);
                     }
                     pila.Apilar(primerTermino);
+                    cadena.EliminarInicio();
                     break;
                 case "/":
                     while (!pila.EsVacio() && Precedencia((String) pila.getTope().getElemento()) >= Precedencia(primerTermino)) {
@@ -283,7 +297,19 @@ public class Funciones {
                         listaSalida.InsertarFinal(elementoPila);
                     }
                     pila.Apilar(primerTermino);
+                    cadena.EliminarInicio();
                     break;
+                case "^":
+                    while (!pila.EsVacio() && Precedencia((String) pila.getTope().getElemento()) >= Precedencia(primerTermino)) {
+                        String elementoPila = (String) pila.Desapilar2().getElemento();
+                        listaSalida.InsertarFinal(elementoPila);
+                    }
+                    pila.Apilar(primerTermino);
+                    cadena.EliminarInicio();
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Sucedió un error");
+                    return listaSalida;
             }
         }
 
@@ -297,4 +323,184 @@ public class Funciones {
         return listaSalida;
     }
 
+    
+    public ArbolAB TraduccionPostArbol(Lista listaPostFija)
+    {
+        Pila pila = new Pila();
+        ArbolAB arbol = new ArbolAB();
+        boolean error = false;
+        
+        while(!listaPostFija.EsVacio() && !error)
+        {
+            String primerTermino = (String) listaPostFija.getPfirst().getElemento();
+            
+            switch(primerTermino)
+            {
+                case "0":
+                    pila.Apilar(primerTermino);
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "1":
+                    pila.Apilar(primerTermino);
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "2":
+                    pila.Apilar(primerTermino);
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "3":
+                    pila.Apilar(primerTermino);
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "4":
+                    pila.Apilar(primerTermino);
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "5":
+                    pila.Apilar(primerTermino);
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "6":
+                    pila.Apilar(primerTermino);
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "7":
+                    pila.Apilar(primerTermino);
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "8":
+                    pila.Apilar(primerTermino);
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "9":
+                    pila.Apilar(primerTermino);
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "x":
+                    pila.Apilar(primerTermino);
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "y":
+                    pila.Apilar(primerTermino);
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "(":
+                    error = true;
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "/":
+                    if (pila.getSize() < 2) 
+                    {
+                        error = true;
+                    }else
+                    {
+                        String a1 = (String) pila.Desapilar2().getElemento();
+                        String a2 = (String) pila.Desapilar2().getElemento();
+                        
+                        ArbolAB arbolExpresion = new ArbolAB();
+                        arbolExpresion.Insertar(a1, primerTermino, "left");
+                        arbolExpresion.Insertar(a2, primerTermino, "right");
+                        
+                        arbol.setRoot(arbolExpresion.getRoot());
+                    }
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "*":
+                    if (pila.getSize() < 2) 
+                    {
+                        error = true;
+                    }else
+                    {
+                        String a1 = (String) pila.Desapilar2().getElemento();
+                        String a2 = (String) pila.Desapilar2().getElemento();
+                        
+                        ArbolAB arbolExpresion = new ArbolAB();
+                        arbolExpresion.Insertar(a1, primerTermino, "left");
+                        arbolExpresion.Insertar(a2, primerTermino, "right");
+                        
+                        arbol.setRoot(arbolExpresion.getRoot());
+                    }
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "+":
+                    if (pila.getSize() < 2) 
+                    {
+                        error = true;
+                    }else
+                    {
+                        String a1 = (String) pila.Desapilar2().getElemento();
+                        String a2 = (String) pila.Desapilar2().getElemento();
+                        
+                        ArbolAB arbolExpresion = new ArbolAB();
+                        arbolExpresion.Insertar(a1, primerTermino, "left");
+                        arbolExpresion.Insertar(a2, primerTermino, "right");
+                        
+                        arbol.setRoot(arbolExpresion.getRoot());
+                    }
+                    listaPostFija.EliminarInicio();
+                    break;
+                case "-":
+                    if (pila.getSize() < 2) 
+                    {
+                        error = true;
+                    }else
+                    {
+                        String a1 = (String) pila.Desapilar2().getElemento();
+                        String a2 = (String) pila.Desapilar2().getElemento();
+                        
+                        ArbolAB arbolExpresion = new ArbolAB();
+                        arbolExpresion.Insertar(a1, primerTermino, "left");
+                        arbolExpresion.Insertar(a2, primerTermino, "right");
+                        
+                        arbol.setRoot(arbolExpresion.getRoot());
+                    }
+                    listaPostFija.EliminarInicio();
+                    break;                    
+                case "^":
+                    if (pila.getSize() < 2) 
+                    {
+                        error = true;
+                    }else
+                    {
+                        String a1 = (String) pila.Desapilar2().getElemento();
+                        String a2 = (String) pila.Desapilar2().getElemento();
+                        
+                        ArbolAB arbolExpresion = new ArbolAB();
+                        arbolExpresion.Insertar(primerTermino, null, null);
+                        arbolExpresion.Insertar(a1, primerTermino, "left");
+                        arbolExpresion.Insertar(a2, primerTermino, "right");
+                        
+                        arbol.setRoot(arbolExpresion.getRoot());
+                    }
+                    listaPostFija.EliminarInicio();
+                    break;
+                default:
+                    listaPostFija.EliminarInicio();
+                    System.out.println("Error");
+                    break;
+            }
+        }
+        
+        if (pila.EsVacio() || pila.getSize() > 1) 
+        {
+            error = true;
+        }
+//        else
+//        {
+//            var elementoPila = (ArbolAB)pila.Desapilar2().getElemento();
+//            
+//            if (elementoPila.EsVacio())
+//            {
+//                arbol.Insertar(elementoPila.getRoot().getDato(), null, null);
+//            }
+//            
+//            return arbol;
+//        }
+        
+        if (error)
+        {
+            pila.Vaciar();
+        }
+        return arbol;
+    }
 }

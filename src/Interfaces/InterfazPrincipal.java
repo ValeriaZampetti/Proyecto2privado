@@ -11,6 +11,8 @@ import proyecto2.ArbolAB;
 import proyecto2.Funciones;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.SingleGraph;
 import proyecto2.Lista;
 
 /**
@@ -19,18 +21,28 @@ import proyecto2.Lista;
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
 
-    ArbolAB arbol = new ArbolAB();
+    ArbolAB arbol;
 
-    Funciones func = new Funciones();
+    Funciones func;
     
     static Lista list;
     
+    Lista listaTraducida;
+    
     static String[] arreglo;
     
+    Graph grafica;
+    
     public InterfazPrincipal() {
-        initComponents();
+        arbol = new ArbolAB();
+        func = new Funciones();
+        list = new Lista();
+        listaTraducida = new Lista();
+        grafica = new SingleGraph("Arbol de Expresiones");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        initComponents();
+
     }
 
     /**
@@ -45,7 +57,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cargartxt = new javax.swing.JButton();
-        mostrar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         resultado = new javax.swing.JTextArea();
@@ -66,22 +77,14 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jPanel1.add(cargartxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
 
-        mostrar.setText("Mostrar");
-        mostrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostrarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
-
         jLabel2.setText("Proyecto 2");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 60, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 100, -1));
 
         resultado.setColumns(20);
         resultado.setRows(5);
         jScrollPane1.setViewportView(resultado);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 510, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 510, 130));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 420));
 
@@ -109,29 +112,26 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 //        for (int i = 0; i < arreglo.length; i++) {
 //            System.out.println(arreglo[i]);
 //        }
-        func.TipoDeNotacion(arreglo);
+        list = func.TipoDeNotacion(arreglo);
         
-//        list.Imprimir();
+        //list.Imprimir();
+        String textoLista = list.CadenaCompleta()+"\n";
         
+        listaTraducida = func.TraduccionInfijaApost(list);
+        
+        //listaTraducida.Imprimir();
+        String texto2 = listaTraducida.CadenaCompleta();
+        
+        resultado.setText(textoLista+texto2);
 //        func.TraduccionInfijaApost(list);
 
-    }//GEN-LAST:event_cargartxtActionPerformed
+        arbol = func.TraduccionPostArbol(listaTraducida);
+        
+        grafica = arbol.CrearGrafica_arbol();
+        arbol.CrearNodes(grafica, arbol.getRoot());
+        arbol.CrearEdges(grafica, arbol.getRoot());
 
-    private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
-        // TODO add your handling code here:
-        String recorridoarreglo="";
-        
-        for (int i = 0; i < arreglo.length; i++) {
-            
-            recorridoarreglo+=arreglo[i];
-            
-            
-        } 
-        
-        resultado.setText(recorridoarreglo);
-        
-        
-    }//GEN-LAST:event_mostrarActionPerformed
+    }//GEN-LAST:event_cargartxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,7 +179,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton mostrar;
     private javax.swing.JTextArea resultado;
     // End of variables declaration//GEN-END:variables
 }

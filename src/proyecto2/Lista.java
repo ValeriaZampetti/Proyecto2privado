@@ -59,6 +59,21 @@ public class Lista {
         }
     }
     
+    public String CadenaCompleta() {
+        String cadena = "";
+        if (!EsVacio()) {
+            Nodo aux = getPfirst();
+            for (int i = 0; i < getSize(); i++) {
+                cadena += aux.getElemento() + " ";
+                aux = aux.getSiguiente();
+            }
+        } else {
+            System.out.println("La lista esta vacia");
+        }
+        
+        return cadena;
+    }
+    
     public void EliminarInicio() {
 
         if (!EsVacio()) {
